@@ -12,19 +12,22 @@ const HomePic = () => {
     { img: Img3, alt: 'hero3' },
     { img: Img4, alt: 'hero4' },
     { img: Img5, alt: 'hero5' },
-    { img: Img6, alt: 'hero6' },
+    { img: Img1, alt: 'hero6' },
   ];
 
   return (
-    <div className="-mt-7 flex gap-[16px]">
-      {images.map((item, index) => (
-        <img
-          key={index}
-          src={item.img}
-          alt={item.alt}
-          className=" max-h-[527px]  overflow-x-hidden"
-        />
-      ))}
+    <div className="relative  overflow-hidden w-full max-w-[1920px] mx-auto">
+      <div className="animate-marquee-alternate gap-[16px]">
+        {[...images, ...images].map((image, index) => (
+          <div key={index} className="flex-shrink-0">
+            <img
+              src={image.img}
+              alt={image.alt}
+              className="xl:w-[351px] xl:h-[527px] w-[150px] h-[167px] md:w-[250px] md:h-auto object-cover rounded-xl"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
