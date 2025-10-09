@@ -6,6 +6,7 @@ import Logo from '/logo.webp';
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('Home');
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -18,15 +19,45 @@ const NavigationBar = () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        'aboutus',
+        'tokenomics',
+        'services',
+        'roadmap',
+        'community',
+        'faq',
+        'blogs',
+      ];
+      const scrollPosition = window.scrollY + 100;
+
+      let current = 'Home';
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element && scrollPosition >= element.offsetTop) {
+          current =
+            section === 'aboutus'
+              ? 'About Us'
+              : section.charAt(0).toUpperCase() + section.slice(1);
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const navLinks = [
-    { name: 'Home', link: '/' },
-    { name: 'About Us', link: '/aboutus' },
-    { name: 'Tokenomics', link: '/tokenomics' },
-    { name: 'Services', link: '/services' },
-    { name: 'Roadmap', link: '/roadmap' },
-    { name: 'Community', link: '/community' },
-    { name: 'FAQ', link: '/faq' },
-    { name: 'Blogs', link: '/blogs' },
+    { name: 'Home', link: '#' },
+    { name: 'About Us', link: '#aboutus' },
+    { name: 'Tokenomics', link: '#tokenomics' },
+    { name: 'Services', link: '#services' },
+    { name: 'Roadmap', link: '#roadmap' },
+    { name: 'Community', link: '#community' },
+    { name: 'FAQ', link: '#faq' },
+    { name: 'Blogs', link: '#blogs' },
   ];
 
   return (
@@ -49,7 +80,11 @@ const NavigationBar = () => {
             <a
               href={link.link}
               key={link.name}
-              className="font-sans text-[16px] leading-[24px] font-normal text-white"
+              className={`relative font-sans text-[16px] leading-[24px] font-normal text-white after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:text-gray-300 ${
+                link.name === activeSection
+                  ? 'after:w-full'
+                  : 'after:w-0 hover:after:w-full'
+              }`}
             >
               {link.name}
             </a>
@@ -68,7 +103,7 @@ const NavigationBar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="fixed top-0 right-0 left-0 z-5000000 bg-black/95 backdrop-blur-md lg:hidden">
+      <div className="fixed top-0 right-0 left-0 z-5000000 bg-black backdrop-blur-md lg:hidden">
         <div className="flex justify-between px-[20px] py-[16px]">
           {/* Logo */}
           <div>
@@ -108,7 +143,11 @@ const NavigationBar = () => {
             <a
               href={link.link}
               key={link.name}
-              className="block py-[12px] font-sans text-[16px] leading-[24px] font-normal text-white transition-all duration-300 ease-in-out hover:translate-x-2 hover:text-gray-300"
+              className={`relative block py-[12px] font-sans text-[16px] leading-[24px] font-normal text-white transition-all duration-300 ease-in-out after:absolute after:bottom-[8px] after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:translate-x-2 hover:text-gray-300 ${
+                link.name === activeSection
+                  ? 'after:w-full'
+                  : 'after:w-0 hover:after:w-full'
+              }`}
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => setIsMenuOpen(false)}
             >
