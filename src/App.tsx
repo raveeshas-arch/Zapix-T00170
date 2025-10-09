@@ -8,12 +8,27 @@ import ServicesSection from './pages/home/sections/ServicesSection';
 import TokenomicsSection from './pages/home/sections/TokenomicsSection';
 import ContactSection from './pages/home/sections/ContactSection';
 import BlogsSection from './pages/home/sections/BlogsSection';
-
+import PieChart from './components/ui/PieChart';
+import Galaxy from './components/ui/Galaxy';
 
 function App() {
   return (
-    <div>
-      <NavigationBar />
+    <div className="relative">
+      {/* Fixed Galaxy Background */}
+      <div className="fixed inset-0 z-0 opacity-30">
+        <Galaxy 
+          mouseRepulsion={false}
+          mouseInteraction={false}
+          density={1.5}
+          glowIntensity={0.3}
+          saturation={0.6}
+          hueShift={240}
+        />
+      </div>
+      
+      {/* Content with higher z-index */}
+      <div className="relative z-10">
+        <NavigationBar />
       <section id="home ">
         <HeroSection />
       </section>
@@ -47,7 +62,8 @@ function App() {
       <section>
         <ContactSection />
       </section>
-
+        {/* <PieChart /> */}
+      </div>
     </div>
   );
 }

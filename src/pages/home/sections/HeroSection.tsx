@@ -53,7 +53,7 @@ const HeroSection = () => {
           visible: { transition: { staggerChildren: 0.3 } }
         }}
       >
-        <motion.h1 className="font-lora text-[32px] leading-[40px] font-normal md:text-[64px] md:leading-[72px]" variants={fadeUpVariant}>
+        <motion.h1 className="font-lora text-[32px]  leading-[40px] font-normal md:text-[64px] md:leading-[72px]" variants={fadeUpVariant}>
           Use your Zapix.
         </motion.h1>
         <motion.h1 className="font-lora text-[32px] leading-[40px] font-normal md:text-[64px] md:leading-[72px]" variants={fadeUpVariant}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image1 from '../../assets/connect1.webp';
 import Image2 from '../../assets/connect2.webp';
 import Image3 from '../../assets/connect3.webp';
@@ -55,7 +55,7 @@ const ConnectedImages = () => {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-[24px] overflow-x-auto py-10 px-4 lg:px-0 bg-black">
+    <div className="scrollbar-hide mx-auto flex max-w-[1680px] items-center justify-center gap-[12px] overflow-x-auto scroll-smooth bg-black px-4 py-10 lg:gap-[24px] lg:px-0">
       {details.map((item, index) => {
         const isActive = activeIndex === index;
 
@@ -63,33 +63,33 @@ const ConnectedImages = () => {
           <div
             key={index}
             onMouseEnter={() => setActiveIndex(index)}
-            className={`relative overflow-hidden rounded-[35px] cursor-pointer flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] 
-            ${isActive ? "w-[615px] h-[732px]" : "w-[149px] h-[732px]"}`}
+            onClick={() => setActiveIndex(index)}
+            className={`relative flex-shrink-0 cursor-pointer overflow-hidden rounded-[24px] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:rounded-[35px] ${index === 0 ? 'ml-[150px] md:ml-10 lg:ml-150 xl:ml-50 2xl:ml-0' : ''} ${isActive || (index === 0 && activeIndex === 0) ? 'h-[284px] w-[189px] lg:h-[732px] lg:w-[615px]' : 'h-[293px] w-[55px] lg:h-[732px] lg:w-[149px]'}`}
           >
             {/* Image */}
             <img
               src={item.src}
               alt={item.title}
-              className={`w-full h-full object-cover rounded-[35px] transition-transform duration-700 ease-in-out ${
-                isActive ? "scale-105" : "scale-100"
+              className={`h-full w-full object-cover ${index % 2 === 0 ? 'object-right' : 'object-left'} rounded-[24px] transition-transform duration-700 ease-in-out lg:rounded-[35px] ${
+                isActive ? 'scale-105' : 'scale-100'
               }`}
             />
 
             {/* Full transparent overlay + text */}
             <div
               className={`absolute inset-0 transition-opacity duration-500 ${
-                isActive ? "opacity-100" : "opacity-0"
+                isActive ? 'opacity-100' : 'opacity-0'
               }`}
             >
               {/* Full background overlay */}
-              <div className="absolute inset-0 bg-[#00000085] rounded-[35px] z-0 transition-opacity duration-700"></div>
+              <div className="absolute inset-0 z-0 rounded-[24px] bg-[#00000085] transition-opacity duration-700 lg:rounded-[35px]"></div>
 
               {/* Centered text at bottom */}
-              <div className=" z-10 px-8 py-6 max-w-[553px] absolute bottom-[74px] left-0 right-0">
-                <h3 className="font-lora font-normal text-[28px] leading-[32px] text-white">
+              <div className="absolute right-0 left-0 z-10 mt-[87px] max-w-[168px] px-[10px] lg:bottom-[74px] lg:max-w-[553px] lg:px-8 lg:py-6">
+                <h3 className="font-lora text-[16px] leading-[24px] font-normal text-white lg:text-[28px] lg:leading-[32px]">
                   {item.title}
                 </h3>
-                <p className="font-sans font-normal text-[16px] leading-[24px] text-white mt-[16px]">
+                <p className="mt-[16px] font-sans text-[14px] leading-[20px] font-normal text-white lg:text-[16px] lg:leading-[24px]">
                   {item.description}
                 </p>
               </div>

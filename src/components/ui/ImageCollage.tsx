@@ -12,7 +12,8 @@ import Marquee from "react-fast-marquee";
 
 const ImageCollage: React.FC = () => {
   return (
-    <div className='max-w-[1680px] overflow-x-auto mx-auto mt-[68px]'>
+ 
+    <div className= ' max-w-[1680px] overflow-x-auto mx-auto mt-[68px]'>
       <div className='flex gap-[10px] md:gap-[24px] justify-center'>
         <Marquee>
           <div className='flex gap-[10px] md:gap-[24px]'>
@@ -46,6 +47,8 @@ const ImageCollage: React.FC = () => {
         </Marquee>
       </div>
     </div>
+
+
   );
 };
 

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import Title from '@/components/ui/Title';
 import Road1 from '../../../assets/road1.webp';
 import Road2 from '../../../assets/road2.webp';
@@ -7,12 +8,37 @@ import Road5 from '../../../assets/road5.webp';
 import MobileRoadmap from '../../../components/ui/MobileRoadmap';
 
 const RoadmapSection = () => {
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   type TimelineItem = {
     title: string;
     description: string;
     icon: string;
     side: 'left' | 'right';
   };
+
+  useEffect(() => {
+    const observers = itemRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleItems(prev => [...prev, index]);
+          }
+        },
+        { threshold: 0.3 }
+      );
+      
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach(observer => observer?.disconnect());
+    };
+  }, []);
 
   const timelineData: TimelineItem[] = [
     {
@@ -62,7 +88,7 @@ const RoadmapSection = () => {
       </div>
 
       <div className="mx-auto max-w-[1680px]">
-        <div className="relative bg-black py-16 text-white">
+        <div className="relative bg-transparent py-16 text-white">
           {/* Desktop Timeline */}
           <div className="relative mx-auto hidden px-[16px] lg:block">
             {/* Vertical dashed line */}
@@ -73,12 +99,21 @@ const RoadmapSection = () => {
               {timelineData.map((item, index) => (
                 <div
                   key={index}
-                  className="relative grid items-center md:grid-cols-10"
+                  ref={el => itemRefs.current[index] = el}
+                  className={`relative grid items-center md:grid-cols-10 transition-all duration-700 ${
+                    visibleItems.includes(index) 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
+                  }`}
                 >
                   {item.side === 'left' ? (
                     <>
                       {/* Left card */}
-                      <div className="z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-1 md:border-[1px] md:border-[#636363]">
+                      <div className={`z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-1 md:border-[1px] md:border-[#636363] transition-all duration-700 ${
+                        visibleItems.includes(index)
+                          ? 'opacity-100 translate-x-0'
+                          : 'opacity-0 -translate-x-8'
+                      }`} style={{ transitionDelay: `${index * 200}ms` }}>
                         <div className="flex md:gap-[16px]">
                           <div className="rounded-full bg-white p-[4px]">
                             <img
@@ -99,9 +134,14 @@ const RoadmapSection = () => {
                       {/* Center connector */}
                       <div className="relative md:col-span-2 md:col-start-5">
                         <span
-                          className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden w-[40px] border-t-4 border-white lg:block xl:w-[90px]"
+                          className={`pointer-events-none absolute top-1/2 left-1/2 z-20 hidden border-t-4 border-white lg:block xl:w-[90px] transition-all duration-500 ${
+                            visibleItems.includes(index)
+                              ? 'w-[40px] xl:w-[90px] opacity-100'
+                              : 'w-0 opacity-0'
+                          }`}
                           style={{
                             transform: 'translate(calc(-100% - 46.5px), -50%)',
+                            transitionDelay: `${index * 200 + 300}ms`
                           }}
                         />
                       </div>
@@ -117,13 +157,24 @@ const RoadmapSection = () => {
                       {/* Center connector */}
                       <div className="relative md:col-span-2 md:col-start-5">
                         <span
-                          className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden w-[40px] border-t-4 border-white md:block xl:w-[90px]"
-                          style={{ transform: 'translate(46.5px, -50%)' }}
+                          className={`pointer-events-none absolute top-1/2 left-1/2 z-20 hidden border-t-4 border-white md:block xl:w-[90px] transition-all duration-500 ${
+                            visibleItems.includes(index)
+                              ? 'w-[40px] xl:w-[90px] opacity-100'
+                              : 'w-0 opacity-0'
+                          }`}
+                          style={{ 
+                            transform: 'translate(46.5px, -50%)',
+                            transitionDelay: `${index * 200 + 300}ms`
+                          }}
                         />
                       </div>
 
                       {/* Right card */}
-                      <div className="z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-7 md:border-[1px] md:border-[#636363]">
+                      <div className={`z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-7 md:border-[1px] md:border-[#636363] transition-all duration-700 ${
+                        visibleItems.includes(index)
+                          ? 'opacity-100 translate-x-0'
+                          : 'opacity-0 translate-x-8'
+                      }`} style={{ transitionDelay: `${index * 200}ms` }}>
                         <div className="flex md:gap-[16px]">
                           <div className="rounded-full bg-white p-[4px]">
                             <img
@@ -143,7 +194,11 @@ const RoadmapSection = () => {
                     </>
                   )}
                   {/* Center dot aligned to the vertical timeline */}
-                  <div className="absolute top-1/2 left-1/2 z-10 h-[17px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-black bg-white md:h-[35px] md:w-[35px]" />
+                  <div className={`absolute top-1/2 left-1/2 z-10 h-[17px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-black bg-white md:h-[35px] md:w-[35px] transition-all duration-500 ${
+                    visibleItems.includes(index)
+                      ? 'scale-100 opacity-100'
+                      : 'scale-0 opacity-0'
+                  }`} style={{ transitionDelay: `${index * 200 + 150}ms` }} />
                 </div>
               ))}
             </div>
