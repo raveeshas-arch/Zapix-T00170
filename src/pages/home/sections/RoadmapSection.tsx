@@ -53,7 +53,7 @@ const RoadmapSection = () => {
   ];
 
   return (
-    <section className='max-w-[1920px] mx-auto  '>
+    <section className="mx-auto max-w-[1920px]">
       <div className="mx-auto flex max-w-[1920px] flex-col justify-center">
         <Title
           title="Roadmap of Zapix"
@@ -61,59 +61,97 @@ const RoadmapSection = () => {
         />
       </div>
 
-      <div className='max-w-[1680px] mx-auto'>
+      <div className="mx-auto max-w-[1680px]">
         <div className="relative bg-black py-16 text-white">
-          <div className=" mx-auto grid  md:grid-cols-9  gap-[16px]  px-[16px] ">
-            {timelineData.map((item, index) => (
-              <div
-                key={index}
-                className={`col-span-4 rounded-[24px] p-[16px] md:border-[1px] md:border-[#636363]  ${
-                  item.side === 'left'
-                    ? 'md:col-start-1 col-start-3 text-right'
-                    : 'col-start-6 text-left'
-                }`}
-              >
-                <div className="flex md:gap-[16px] ">
-                  <div className="rounded-full bg-white p-[4px]">
-                    <img
-                      src={item.icon}
-                      alt={item.title}
-                      className="md:h-[24px] md:w-[24px] w-[45px] h-[45px]"
-                    />
-                  </div>
+          {/* Desktop Timeline */}
+          <div className="relative mx-auto hidden px-[16px] lg:block">
+            {/* Vertical dashed line */}
+            <div className="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 border-l-2 border-dashed border-gray-500" />
 
-                  <h3 className="font-dmsans mb-2  text-[18px] leading-[24px] font-bold md:flex hidden ">
-                    {item.title}
-                  </h3>
+            {/* Rows: each item is its own grid row to align dot and card */}
+            <div className="flex flex-col gap-20">
+              {timelineData.map((item, index) => (
+                <div
+                  key={index}
+                  className="relative grid items-center md:grid-cols-10"
+                >
+                  {item.side === 'left' ? (
+                    <>
+                      {/* Left card */}
+                      <div className="z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-1 md:border-[1px] md:border-[#636363]">
+                        <div className="flex md:gap-[16px]">
+                          <div className="rounded-full bg-white p-[4px]">
+                            <img
+                              src={item.icon}
+                              alt={item.title}
+                              className="h-[45px] w-[45px] md:h-[24px] md:w-[24px]"
+                            />
+                          </div>
+                          <h3 className="font-dmsans mb-2 hidden text-[18px] leading-[24px] font-bold md:flex">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <p className="font-dmsans mt-[24px] hidden max-w-[654px] text-left text-[16px] leading-[24px] font-normal text-[#8B8B8B] md:flex">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      {/* Center connector */}
+                      <div className="relative md:col-span-2 md:col-start-5">
+                        <span
+                          className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden w-[40px] border-t-4 border-white lg:block xl:w-[90px]"
+                          style={{
+                            transform: 'translate(calc(-100% - 46.5px), -50%)',
+                          }}
+                        />
+                      </div>
+
+                      {/* Right placeholder */}
+                      <div className="md:col-span-4 md:col-start-7" />
+                    </>
+                  ) : (
+                    <>
+                      {/* Left placeholder */}
+                      <div className="md:col-span-4 md:col-start-1" />
+
+                      {/* Center connector */}
+                      <div className="relative md:col-span-2 md:col-start-5">
+                        <span
+                          className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden w-[40px] border-t-4 border-white md:block xl:w-[90px]"
+                          style={{ transform: 'translate(46.5px, -50%)' }}
+                        />
+                      </div>
+
+                      {/* Right card */}
+                      <div className="z-10 max-w-[686px] rounded-[24px] p-[16px] md:col-span-4 md:col-start-7 md:border-[1px] md:border-[#636363]">
+                        <div className="flex md:gap-[16px]">
+                          <div className="rounded-full bg-white p-[4px]">
+                            <img
+                              src={item.icon}
+                              alt={item.title}
+                              className="h-[45px] w-[45px] md:h-[24px] md:w-[24px]"
+                            />
+                          </div>
+                          <h3 className="font-dmsans mb-2 hidden text-[18px] leading-[24px] font-bold md:flex">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <p className="font-dmsans mt-[24px] hidden max-w-[654px] text-left text-[16px] leading-[24px] font-normal text-[#8B8B8B] md:flex">
+                          {item.description}
+                        </p>
+                      </div>
+                    </>
+                  )}
+                  {/* Center dot aligned to the vertical timeline */}
+                  <div className="absolute top-1/2 left-1/2 z-10 h-[17px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-black bg-white md:h-[35px] md:w-[35px]" />
                 </div>
-
-                <p className="font-dmsans md:flex hidden mt-[24px]  max-w-[654px] text-left text-[16px] leading-[24px] font-normal text-[#8B8B8B] ">
-                  {item.description}
-                </p>
-
-              </div>
-            ))}
-
-
-          
-
-            {/* Timeline line */}
-            <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform border-r-2 border-dashed border-gray-500" />
-
-            {/* Dots */}
-            {timelineData.map((_, index) => (
-              <div
-                key={index}
-                className="absolute left-1/2 md:h-[35px] md:w-[35px] h-[17px] w-[16px] -translate-x-1/2 transform rounded-full border-4 border-black bg-white"
-                style={{ top: `${(index + 1) * 20}%` }}
-              />
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Roadmap */}
-
       <MobileRoadmap />
     </section>
   );

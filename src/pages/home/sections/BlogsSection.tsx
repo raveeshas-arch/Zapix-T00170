@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Title from '@/components/ui/Title';
 import Blog1 from '../../../assets/Blog1.webp';
 import Blog2 from '../../../assets/Blog2.webp';
@@ -11,14 +12,12 @@ const BlogsSection = () => {
       description:
         'Read all about new features, updates, and major announcements about the Zapix token.',
     },
-
     {
       title: 'How-To Guides',
       Image: Blog2,
       description:
         'Stories, interviews, and highlights from our amazing community members and creators.',
     },
-
     {
       title: 'Community Spotlights',
       Image: Blog3,
@@ -26,23 +25,39 @@ const BlogsSection = () => {
         'Stories, interviews, and highlights from our amazing community members and creators.',
     },
   ];
+
   return (
-    <section>
+    <section className="overflow-hidden max-w-[1920px] mx-auto">
       {/* Title */}
-      <div className="flex flex-col justify-center">
+      <motion.div
+        className="flex flex-col justify-center px-4 md:px-0"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <Title
           title="Zapix Blogs"
-          description="Stay updated with the latest news, tips, and ideas from the world of Zapix. Our blog is the place to explore everything about our token — from updates and community highlights to learning guides and future plans. Whether you're new or experienced, there's always something useful here."
+        description="Stay updated with the latest news, tips, and ideas from the world of Zapix. Our blog is the place to explore everything about our token — from updates and community highlights to learning guides and future plans. Whether you're new or experienced, there's always something useful here."
         />
-      </div>
+      </motion.div>
 
-      {/* Blog  */}
-
-      <div className="mx-auto mt-[32px] flex min-h-[433px] max-w-[690px] gap-[24px] overflow-x-scroll px-[16px] md:px-0">
+      {/* Blog Cards */}
+      <motion.div
+        className="mx-auto mt-[32px] flex h-[433px] max-w-[700px]  gap-[24px] overflow-x-scroll px-[16px] md:px-0 scrollbar-hide"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      >
         {blogs.map((blog, id) => (
-          <div
+          <motion.div
             key={id}
-            className="rounded-[88px] border border-[#636363] px-[22px]"
+            className="rounded-[88px] border w-[203px]  border-[#636363] px-[22px] flex-shrink-0"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: id * 0.2 }}
           >
             <img
               src={blog.Image}
@@ -57,9 +72,9 @@ const BlogsSection = () => {
                 {blog.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

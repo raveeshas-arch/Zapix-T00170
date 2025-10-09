@@ -8,40 +8,42 @@ import img6 from '../../assets/service6.webp'
 import img7 from '../../assets/service7.webp'
 import img8 from '../../assets/service8.webp'
 import img9 from '../../assets/service9.webp'
+import Marquee from "react-fast-marquee";
 
 const ImageCollage: React.FC = () => {
   return (
     <div className='max-w-[1680px] overflow-x-auto mx-auto mt-[68px]'>
-      <div className='flex gap-[24px] justify-center'>
+      <div className='flex gap-[10px] md:gap-[24px] justify-center'>
+        <Marquee>
+          <div className='flex gap-[10px] md:gap-[24px]'>
+            {/* First Image Grid */}
+            <div className='flex flex-col mt-[60px] md:mt-[117px] gap-[8px] md:gap-[24px]'>
+              <img src={img1} alt='serviceimage1' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-1'/>
+              <img src={img2} alt='serviceimage2' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-2'/>
+            </div>
 
-        <div className='flex gap-[24px]'>
-          {/* First Image Grid */}
-          <div className='flex flex-col mt-[117px] gap-[24px]'>
-            <img src={img1} alt='serviceimage1' className='w-[260px] h-[268px] rounded-2xl animate-float-1'/>
-            <img src={img2} alt='serviceimage2' className='w-[260px] h-[268px] rounded-2xl animate-float-2'/>
+            {/* Second Image Grid */}
+            <div className='flex flex-col gap-[10px] md:gap-[24px]'>
+              <img src={img3} alt='serviceimage3' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-3'/>
+              <img src={img4} alt='serviceimage4' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-1'/>
+            </div>
           </div>
 
-          {/* Second Image Grid */}
-          <div className='flex flex-col gap-[24px]'>
-            <img src={img3} alt='serviceimage3' className='w-[260px] h-[268px] rounded-2xl animate-float-3'/>
-            <img src={img4} alt='serviceimage4' className='w-[260px] h-[268px] rounded-2xl animate-float-1'/>
+          {/* Third Image Grid */}
+          <div className='flex gap-[10px] md:gap-[24px] mt-[40px] md:mt-[96px]'>
+            <img src={img5} alt='serviceimage5' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-2'/>
+            <img src={img6} alt='serviceimage6' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl mt-[40px] md:mt-[99px] animate-float-3'/>
+            <img src={img7} alt='serviceimage7' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-1'/>
           </div>
-        </div>
 
-        {/* Third Image Grid */}
-        <div className='flex gap-[24px] mt-[96px]'>
-          <img src={img5} alt='serviceimage5' className='w-[260px] h-[268px] rounded-2xl animate-float-2'/>
-          <img src={img6} alt='serviceimage6' className='w-[260px] h-[268px] rounded-2xl mt-[99px] animate-float-3'/>
-          <img src={img7} alt='serviceimage7' className='w-[260px] h-[268px] rounded-2xl animate-float-1'/>
-        </div>
-
-        {/* Fourth Image Grid */}
-        <div>
-          <div className='flex flex-col gap-[24px]'>
-            <img src={img8} alt='serviceimage8' className='w-[260px] h-[268px] rounded-2xl animate-float-2'/>
-            <img src={img9} alt='serviceimage9' className='w-[260px] h-[268px] rounded-2xl animate-float-3'/>
+          {/* Fourth Image Grid */}
+          <div>
+            <div className='flex flex-col gap-[10px] md:gap-[24px]'>
+              <img src={img8} alt='serviceimage8' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-2'/>
+              <img src={img9} alt='serviceimage9' className='w-[88px] h-[89px] md:w-[260px] md:h-[268px] rounded-2xl animate-float-3'/>
+            </div>
           </div>
-        </div>
+        </Marquee>
       </div>
     </div>
   );

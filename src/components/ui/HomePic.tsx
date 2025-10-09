@@ -12,7 +12,7 @@ const HomePic = () => {
     { img: Img3, alt: 'hero3' },
     { img: Img4, alt: 'hero4' },
     { img: Img5, alt: 'hero5' },
-    { img: Img1, alt: 'hero6' },
+    { img: Img6, alt: 'hero6' },
   ];
 
   return (

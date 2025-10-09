@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image1 from '../../assets/connect1.webp';
 import Image2 from '../../assets/connect2.webp';
 import Image3 from '../../assets/connect3.webp';
@@ -6,91 +6,97 @@ import Image4 from '../../assets/connect4.webp';
 import Image5 from '../../assets/connect5.webp';
 import Image6 from '../../assets/connect6.webp';
 
-const images = [Image1, Image2, Image3, Image4, Image5, Image6];
-
 const ConnectedImages = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const details = [
+    {
+      title: 'Open and Friendly Space',
+      src: Image1,
+      description:
+        'Everyone is welcome in the Zapix community. We create a safe space to talk, share, and learn about the token and its use.',
+      url: 'service1',
+    },
+    {
+      title: 'Social Media Connection',
+      src: Image2,
+      description:
+        'Join our active community on platforms like Discord, Telegram, and Twitter to stay updated and chat with others.',
+      url: 'service2',
+    },
+    {
+      title: 'Creator & Fan Interaction',
+      src: Image3,
+      description:
+        'Zapix brings artists and fans closer. Creators can get direct feedback, support, and ideas from the community.',
+      url: 'service3',
+    },
+    {
+      title: 'Community Events',
+      src: Image4,
+      description:
+        'We host fun events like giveaways, contests, and AMA (Ask Me Anything) sessions to keep the community active and rewarded.',
+      url: 'service4',
+    },
+    {
+      title: 'Voting & Proposals',
+      src: Image5,
+      description:
+        'Zapix holders will be able to vote on future updates, features, and changes — your voice will help shape Zapix.',
+      url: 'service5',
+    },
+    {
+      title: 'Community Growth Rewards',
+      src: Image6,
+      description:
+        'Earn Zapix tokens by inviting friends, joining events, or helping others. We grow stronger when we grow together.',
+      url: 'service6',
+    },
+  ];
 
   return (
-    <div className="flex  items-center justify-center overflow-hidden mt-[128px]">
+    <div className="flex justify-center items-center gap-[24px] overflow-x-auto py-10 px-4 lg:px-0 bg-black">
+      {details.map((item, index) => {
+        const isActive = activeIndex === index;
 
-      {/* --- Desktop layout --- */}
-      <div className="relative z-10 hidden h-[820px] w-[1680px]  gap-[24px] md:flex  py-[44px] px-[100px]">
-        {images.map((src, index) => {
-          const isExpanded =
-            hoveredIndex === index || (hoveredIndex === null && index === 0);
-
-          return (
-            <div
-              key={index}
-              className={`relative cursor-pointer overflow-hidden rounded-[35px] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                isExpanded ? 'flex-[2.8]' : 'flex-[0.6]'
-              }`}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-             
-             
-              <div className="relative h-full w-full overflow-hidden rounded-[30px] bg-black">
-                <img
-                  src={src}
-                  alt={`image-${index}`}
-                  className={`h-full w-full object-cover transition-all duration-700 ${
-                    isExpanded
-                      ? ' brightness-110'
-                      : ' brightness-90'
-                  }`}
-                />
-
-                {/* Overlay text on first */}
-                {index === 0 && (
-                  <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-                    <h2 className="mb-2 text-2xl font-semibold">
-                      Open and Friendly Space
-                    </h2>
-                    <p className="text-sm opacity-80">
-                      Everyone is welcome in the Zapix community. We create a
-                      safe space to talk, share, and learn about the token and
-                      its use.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* --- Mobile Slider layout --- */}
-      <div className="flex md:hidden relative z-10 gap-4 w-full px-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-        {images.map((src, index) => (
+        return (
           <div
             key={index}
-            className="relative flex-shrink-0 w-[280px] h-[420px] snap-center rounded-[28px] overflow-hidden bg-black"
+            onMouseEnter={() => setActiveIndex(index)}
+            className={`relative overflow-hidden rounded-[35px] cursor-pointer flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] 
+            ${isActive ? "w-[615px] h-[732px]" : "w-[149px] h-[732px]"}`}
           >
-            <div className="absolute inset-0 p-[2px] rounded-[28px] " />
-            <div className="relative w-full h-full rounded-[26px] overflow-hidden">
-              <img
-                src={src}
-                alt={`mobile-image-${index}`}
-                className="w-full h-full object-cover"
-              />
+            {/* Image */}
+            <img
+              src={item.src}
+              alt={item.title}
+              className={`w-full h-full object-cover rounded-[35px] transition-transform duration-700 ease-in-out ${
+                isActive ? "scale-105" : "scale-100"
+              }`}
+            />
 
-              {/* Optional small overlay for first */}
-              {index === 0 && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
-                  <h2 className="text-lg font-semibold mb-1">
-                    Open and Friendly Space
-                  </h2>
-                  <p className="text-xs opacity-80">
-                    Everyone is welcome in the Zapix community.
-                  </p>
-                </div>
-              )}
+            {/* Full transparent overlay + text */}
+            <div
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                isActive ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {/* Full background overlay */}
+              <div className="absolute inset-0 bg-[#00000085] rounded-[35px] z-0 transition-opacity duration-700"></div>
+
+              {/* Centered text at bottom */}
+              <div className=" z-10 px-8 py-6 max-w-[553px] absolute bottom-[74px] left-0 right-0">
+                <h3 className="font-lora font-normal text-[28px] leading-[32px] text-white">
+                  {item.title}
+                </h3>
+                <p className="font-sans font-normal text-[16px] leading-[24px] text-white mt-[16px]">
+                  {item.description}
+                </p>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 };

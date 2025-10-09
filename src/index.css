@@ -11,6 +11,14 @@
   --breakpoint-3xl:1920px;
 }
 
+/* Hero Section */
+
+
+
+
+
+/* Hero Section Images Frame */
+
 @keyframes marquee-alternate {
   0% {
     transform: translateX(0);
@@ -95,6 +103,7 @@ body {
   padding: 0;
   background-color:black; 
   color: white;
+  scroll-behavior: smooth;
 }
 @custom-variant dark (&:is(.dark *));
 
