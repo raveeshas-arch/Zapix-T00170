@@ -16,7 +16,7 @@ const UnderHompic = () => {
 
   return (
     <section className="mx-auto flex max-w-[1920px] justify-center">
-      <div className="absolute  flex flex-col gap-[30px] text-center md:top-230   2xl:flex-row 2xl:px-[115px]">
+      <div className="absolute  flex flex-col gap-[30px] text-center md:top-170 lg:top-200 2xl:top-230  2xl:flex-row 2xl:px-[115px]">
         {details.map((detail, index) => (
           <div key={index} className="relative max-w-[400px] sm:max-w-[554px]">
             <h1 className="font-lora text-[16px] leading-[32px] font-normal text-[#EBEBEB] lg:text-[24px]">
@@ -44,7 +44,7 @@ const UnderHompic = () => {
                   />
                 )}
 
-                {/* Desktop vertical line between cards */}
+                {/* Desktop  line between cards */}
                 {index < details.length - 1 && (
                   <div
                     aria-hidden="true"
