@@ -27,7 +27,7 @@ const BlogsSection = () => {
   ];
 
   return (
-    <section className="overflow-hidden max-w-[1920px] mx-auto">
+    <section className="max-w-[1920px] mx-auto overflow-x-hidden">
       {/* Title */}
       <motion.div
         className="flex flex-col justify-center px-4 md:px-0"
@@ -44,7 +44,7 @@ const BlogsSection = () => {
 
       {/* Blog Cards */}
       <motion.div
-        className="mx-auto mt-[32px] flex h-[433px] max-w-[700px]  gap-[24px] overflow-x-scroll px-[16px] md:px-0 scrollbar-hide"
+        className="mx-auto mt-[32px] flex h-[433px] max-w-[700px] gap-[24px] overflow-x-hidden px-[16px] md:px-0"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -53,14 +53,19 @@ const BlogsSection = () => {
         {blogs.map((blog, id) => (
           <motion.div
             key={id}
-            className="rounded-[88px] border w-[203px] border-[#636363] px-[22px] flex-shrink-0 animate-bounce"
+            className="rounded-[88px] border w-[203px] border-[#636363] px-[22px] flex-shrink-0"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1, ease: "easeOut", delay: id * 0.2 }}
-            style={{
-              animationDelay: `${id * 0.5}s`,
-              animationDuration: '6s',
+            animate={{
+              x: [0, id % 2 === 0 ? 5 : -5, 0],
+              transition: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: id * 0.5,
+              },
             }}
           >
             <img
@@ -68,8 +73,8 @@ const BlogsSection = () => {
               alt="blogimages"
               className="mt-[16px] rounded-full"
             />
-            <div className="mx-auto mt-[24px] w-[160px]">
-              <h1 className="text-left font-sans text-[24px] leading-[32px] font-normal">
+            <div className="mx-auto mt-[24px] w-[180px]">
+              <h1 className="text-left font-sans text-[20px] leading-[28px] font-normal break-words">
                 {blog.title}
               </h1>
               <p className="mt-[10px] text-left font-sans text-[14px] leading-[20px] font-normal">

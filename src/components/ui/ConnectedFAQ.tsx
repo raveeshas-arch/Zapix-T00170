@@ -59,8 +59,11 @@ export default function ConnectedFAQ() {
   }, []);
 
   return (
-    <section id='faq' className="scroll-mt-[150px] flex lg:min-h-[560px] max-w-[878px] flex-col overflow-y-hidden mx-auto px-4 md:px-0">
-      <div className="flex flex-1 flex-col lg:gap-[24px] gap-[10px] overflow-y-auto">
+    <section
+      id="faq"
+      className="mx-auto flex max-w-[878px] scroll-mt-[150px] flex-col overflow-y-hidden px-4 md:px-0 lg:min-h-[560px]"
+    >
+      <div className="flex flex-1 flex-col gap-[10px] overflow-y-auto lg:gap-[24px]">
         {faqItems.map((item, idx) => (
           <div
             key={idx}
@@ -68,10 +71,11 @@ export default function ConnectedFAQ() {
               faqRefs.current[idx] = el;
             }}
             data-index={idx}
-            className={`rounded-[16px] border border-[#636363] p-[16px] transform transition-all duration-700 ease-out
-              ${visibleItems.includes(idx) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`transform rounded-[16px] border border-[#636363] p-[16px] transition-all duration-700 ease-out ${visibleItems.includes(idx) ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
             style={{
-              transitionDelay: visibleItems.includes(idx) ? `${idx * 100}ms` : '0ms',
+              transitionDelay: visibleItems.includes(idx)
+                ? `${idx * 100}ms`
+                : '0ms',
             }}
           >
             <button
@@ -79,7 +83,7 @@ export default function ConnectedFAQ() {
               onClick={() => toggle(idx)}
             >
               <div className="border-l-[3px] border-white">
-                <div className="ml-[24px] font-sans lg:text-[24px] text-[16px] leading-[24px] lg:leading-[32px] font-normal">
+                <div className="ml-[24px] font-sans text-[16px] leading-[24px] font-normal lg:text-[24px] lg:leading-[32px]">
                   {item.q}
                 </div>
               </div>
@@ -91,7 +95,11 @@ export default function ConnectedFAQ() {
                 strokeWidth={2}
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 

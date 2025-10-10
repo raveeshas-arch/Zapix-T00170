@@ -95,7 +95,7 @@ const RoadmapSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="mx-auto max-w-[1920px]">
+    <section ref={sectionRef} className="mx-auto max-w-[1920px] overflow-x-hidden">
       <div className="mx-auto flex max-w-[1920px] flex-col justify-center">
         <Title
           title="Roadmap of Zapix"
