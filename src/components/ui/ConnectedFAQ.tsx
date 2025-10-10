@@ -64,7 +64,9 @@ export default function ConnectedFAQ() {
         {faqItems.map((item, idx) => (
           <div
             key={idx}
-            ref={(el) => (faqRefs.current[idx] = el)}
+            ref={(el) => {
+              faqRefs.current[idx] = el;
+            }}
             data-index={idx}
             className={`rounded-[16px] border border-[#636363] p-[16px] transform transition-all duration-700 ease-out
               ${visibleItems.includes(idx) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}

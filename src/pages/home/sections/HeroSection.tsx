@@ -66,11 +66,17 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
-          <div className="max-w-[222px] rounded-[16px] bg-white">
-            <button className="w-[190px] cursor-pointer p-[16px] font-sans text-[16px] leading-[24px] font-bold text-black">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+            className="max-w-[222px] rounded-[16px] bg-white"
+          >
+            <button 
+            className="w-[190px] cursor-pointer p-[16px] font-sans text-[16px] leading-[24px] font-bold text-black"
+            >
               Join Now
             </button>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
 

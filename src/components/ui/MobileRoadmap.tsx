@@ -46,7 +46,7 @@ const MobileRoadmap = () => {
   ];
 
   return (
-    <div className="mx-auto mt-[37px] flex max-w-[398px] flex-col gap-[16px] lg:hidden">
+    <div className="mx-auto mt-[37px] flex sm:max-w-[398px] max-w-[350px] flex-col gap-[16px] lg:hidden">
       <Chart />
       {RoadmapData.map((data, index) => (
         <div
@@ -61,7 +61,7 @@ const MobileRoadmap = () => {
               {data.title}
             </h1>
           </div>
-          <p className="mt-[16px] max-w-[366px] font-sans text-[16px] leading-[24px] font-normal text-[#8B8B8B]">
+          <p className="mt-[16px] sm:max-w-[366px] max-w-[350px] font-sans text-[16px] leading-[24px] font-normal text-[#8B8B8B]">
             {data.description}
           </p>
         </div>

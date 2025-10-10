@@ -3,6 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { HiOutlineUser } from 'react-icons/hi2';
 import { HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2';
 import Logo from '/logo.webp';
+import { motion } from 'framer-motion';
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,12 +94,20 @@ const NavigationBar = () => {
 
         {/* Search & User */}
         <div className="flex items-center gap-[9px]">
-          <div className="rounded-full border-[2px] border-white bg-black p-[11px]">
+          <motion.div
+            className="cursor-pointer rounded-full border-[2px] border-white bg-black p-[11px]"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
             <AiOutlineSearch className="h-[25px] w-[25px] text-white" />
-          </div>
-          <div className="rounded-full border-[2px] border-black bg-white p-[19px]">
+          </motion.div>
+          <motion.div
+            className="cursor-pointer rounded-full border-[2px] border-black bg-white p-[19px]"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
             <HiOutlineUser className="h-[14px] w-[14px] text-black" />
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -112,18 +121,26 @@ const NavigationBar = () => {
 
           {/* Right Side Icons */}
           <div className="flex items-center gap-[9px]">
-            <div className="rounded-full border-[2px] border-white bg-black p-[11px]">
+            <motion.div
+              className="cursor-pointer rounded-full border-[2px] border-white bg-black p-[11px]"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+            >
               <AiOutlineSearch className="h-[25px] w-[25px] text-white" />
-            </div>
-            <div className="rounded-full border-[2px] border-black bg-white p-[19px]">
-              <HiOutlineUser className="h-[14px] w-[14px] text-black" />
-            </div>
+            </motion.div>
+            <motion.div
+              className="cursor-pointer rounded-full border-[2px] border-white bg-black p-[19px]"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <HiOutlineUser className="h-[14px] w-[14px] text-white" />
+            </motion.div>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="rounded-full bg-white p-[13px] text-black transition-all duration-300 ease-in-out hover:scale-110"
             >
               {isMenuOpen ? (
-                <HiOutlineXMark className="h-[25px] w-[25px] transition-transform duration-300 ease-in-out" />
+                <HiOutlineXMark className="h-[25px] w-[25px] transition-transform duration-300 ease-in-out " />
               ) : (
                 <HiOutlineBars3 className="h-[25px] w-[25px] transition-transform duration-300 ease-in-out" />
               )}
@@ -133,9 +150,9 @@ const NavigationBar = () => {
 
         {/* Mobile Menu */}
         <nav
-          className={`overflow-hidden px-[70px] transition-all duration-500 ease-in-out ${
+          className={`overflow-hidden px-[70px]  transition-all duration-500 ease-in-out ${
             isMenuOpen
-              ? 'max-h-150 py-[16px] opacity-100'
+              ? 'max-h-150 py-[16px]  opacity-100'
               : 'max-h-0 py-0 opacity-0'
           }`}
         >
@@ -143,7 +160,8 @@ const NavigationBar = () => {
             <a
               href={link.link}
               key={link.name}
-              className={`relative block py-[12px] font-sans text-[16px] leading-[24px] font-normal text-white transition-all duration-300 ease-in-out after:absolute after:bottom-[8px] after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:translate-x-2 hover:text-gray-300 ${
+              className={`relative block py-[22px] text-center
+              font-sans text-[16px] leading-[24px] font-normal text-white transition-all duration-300 ease-in-out after:absolute after:bottom-[8px] after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:translate-x-2 hover:text-gray-300 ${
                 link.name === activeSection
                   ? 'after:w-full'
                   : 'after:w-0 hover:after:w-full'

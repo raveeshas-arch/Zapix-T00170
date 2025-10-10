@@ -53,11 +53,15 @@ const BlogsSection = () => {
         {blogs.map((blog, id) => (
           <motion.div
             key={id}
-            className="rounded-[88px] border w-[203px]  border-[#636363] px-[22px] flex-shrink-0"
+            className="rounded-[88px] border w-[203px] border-[#636363] px-[22px] flex-shrink-0 animate-bounce"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: id * 0.2 }}
+            transition={{ duration: 1, ease: "easeOut", delay: id * 0.2 }}
+            style={{
+              animationDelay: `${id * 0.5}s`,
+              animationDuration: '6s',
+            }}
           >
             <img
               src={blog.Image}
